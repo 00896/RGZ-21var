@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{#основной контент: #}
+{% block main %}
+    <!-- Панель пользователя -->
+    <div class="user-panel">
+        {% if session.get('username') %}
+            <span style="text-align: left; margin-right: 670px; margin-left: 10px">Вы вошли как: <strong>{{ session['username'] }}</strong></span>
+            {% if session.get('is_admin') %}
+                <a href="{{ url_for('admin_panel') }}" class="button">Админ-таблицы</a>
+            {% endif %}
+            <a href="{{ url_for('new_initiative') }}" class="button">Добавить инициативу</a>
+            <form method="POST" action="{{ url_for('logout') }}" style="display: inline;width:100px">
+                <button type="submit" class="button">Выйти</button>
+            </form>
+        {% else %}
+            <a href="{{ url_for('login') }}" style="margin-left: 1220px" class="button">Войти</a>
+            <a href="{{ url_for('register') }}" class="button">Регистрация</a>
+        {% endif %}
+    </div>
+
+    
+    <h1>Список инициатив</h1>
+    <br>
+    
+    {% for initiative in initiatives %}
+    <div>
+        <h2>{{ initiative['title'] }}</h2>
+        <div style="margin-bottom:15px; margin-left:55px;font-size:18px">{{ initiative['content'] }}</div>
+        <div style="margin-bottom:15px; margin-left:10px"><i>Автор: {{ initiative['username'] or 'Неизвестно' }}</i></div>
+        
+        <div style="margin-bottom:15px; margin-left:10px">Голоса: {{ initiative['total_votes'] }}</div>
+        
+        <div class="vote-delete-buttons">
+            {% if session.get('user_id') %}
+                {% set user_vote = get_db().execute("SELECT vote_type FROM votes WHERE user_id = ? AND initiative_id = ?", (session['user_id'], initiative['id'])).fetchone() %}
+                
+                <a href="{{ url_for('vote', id=initiative['id'], vote_type='up') }}" class="button {% if user_vote and user_vote['vote_type'] == 'up' %}voted{% endif %}">👍</a>
+                <a href="{{ url_for('vote', id=initiative['id'], vote_type='down') }}" class="button {% if user_vote and user_vote['vote_type'] == 'down' %}voted{% endif %}">👎</a>
+                
+                {% if session['user_id'] == initiative['author_id'] or session.get('is_admin') %}
+                    <a href="{{ url_for('delete_initiative', id=initiative['id']) }}" class="button">Удалить</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    
+    {% if has_more %}
+        <a href="{{ url_for('index', page=page+1) }}" class="button">Ещё</a>
+    {% endif %}
+    {% endblock %}

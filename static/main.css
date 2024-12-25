@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f1ee;
+}
+
+header {
+    background-color: #cac3c6;
+    color: #0b2e53;
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+footer {
+    background-color: #cac3c6;
+    color: #0b2e53;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 1000;
+}
+
+main {
+    padding-top: 30px; 
+    padding-bottom: 50px; 
+    margin: 20px 0px;
+    max-width: 100%;
+    color:#0b2e53
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    color: #67122f;
+}
+
+.form {
+    margin: 20px auto;
+    width: 50%;
+    background: #BAB2B5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #cd8ea3;
+}
+
+.form input, form textarea, form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 3px solid #cac3c6;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #d6a5b5;
+    color:#0b2e53;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 5px; /* Скругленные углы */
+    border: none;
+    float: right; /* Кнопка справа */
+    margin: 10px; /* Отступы */
+    cursor: pointer;
+}
+
+a.button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #d6a5b5;
+    color:#0b2e53;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 5px; /* Скругленные углы */
+    border: none;
+    float: right; /* Кнопка справа */
+    margin: 10px; /* Отступы */
+}
+
+a.button:hover {
+    background-color: #cd8ea3;
+}
+
+button:hover {
+    background-color: #cd8ea3;
+}
+
+a.button:link, a.button:visited {
+    text-decoration:none;
+    color:#0b2e53;
+}
+
+.user-panel {
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    left: 0;
+    right: 0;
+    background-color: #cac3c6;
+}
+
+.user-panel span {
+    font-size: 18px;
+    color: #0b2e53;
+}
+
+.user-panel .button {
+    margin: 0px;
+}
+
+/* Основной стиль для инициативы */
+.initiative {
+    display: flex; /* Используем flexbox для выравнивания */
+    justify-content: space-between; /* Разделяем пространство между текстом и кнопками */
+    align-items: center; 
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    padding: 10px;
+    border-radius: 1px solid #ccc;
+}
+
+.initiative-info {
+    flex: 1; /* блок займет всю доступную ширину */
+    margin-right: 20px; 
+}
+
+.vote-delete-buttons {
+    display: flex; /*flexbox для горизонтального расположения кнопок */
+    align-items: center;
+}
+
+.vote-delete-buttons a.button {
+    margin-left: 10px; 
+}
+
+.button.voted {
+    background-color: #AC3B61; 
+    color: white;
+}

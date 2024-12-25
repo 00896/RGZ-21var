@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{#основной контент: #}
+{% block main %}
+<h1>Админ-панель</h1>
+<h2>Пользователи</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Имя пользователя</th>
+            <th>Администратор</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user['id'] }}</td>
+            <td>{{ user['username'] }}</td>
+            <td>{{ 'Да' if user['is_admin'] else 'Нет' }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('admin_panel') }}" style="width:150px">
+                    <input type="hidden" name="delete_user" value="{{ user['id'] }}">
+                    <button type="submit" class="button">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Инициативы</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Тема</th>
+            <th>Автор</th>
+            <th>Голоса</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for initiative in initiatives %}
+        <tr>
+            <td>{{ initiative['id'] }}</td>
+            <td>{{ initiative['title'] }}</td>
+            <td>{{ initiative['author_id'] }}</td>
+            <td>{{ initiative['votes'] }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('admin_panel') }}" style="width:150px">
+                    <input type="hidden" name="delete_initiative" value="{{ initiative['id'] }}">
+                    <button type="submit" class="button">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
