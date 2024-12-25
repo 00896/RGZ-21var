@@ -47,6 +47,9 @@
     <hr>
     {% endfor %}
     
+    {% if page > 1 %}
+        <a href="{{ url_for('index', page=page-1) }}" class="button">Назад</a>
+    {% endif %}
     {% if has_more %}
         <a href="{{ url_for('index', page=page+1) }}" class="button">Ещё</a>
     {% endif %}
