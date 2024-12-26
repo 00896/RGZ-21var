@@ -208,6 +208,17 @@ def vote(id, vote_type):
                 UPDATE initiatives SET votes = votes - 1 WHERE id = ?
             """, (id,))
 
+        # Получаем общее количество голосов для инициативы
+        total_votes = db.execute(""" 
+            SELECT votes FROM initiatives WHERE id = ? 
+        """, (id,)).fetchone()[0]
+
+        # Если общее количество голосов меньше -10, удаляем инициативу
+        if total_votes < -10:
+            db.execute(""" 
+                DELETE FROM initiatives WHERE id = ? 
+            """, (id,))
+
         db.commit()  # После выполнения всех операций с базой данных
 
     return redirect(url_for('index'))
